@@ -48,16 +48,17 @@ Public Class Request
             request.ContentType = "application/json"
             jsonBody = JsonConvert.SerializeObject(body)
             bodyBytes = Encoding.UTF8.GetBytes(jsonBody)
-            Dim stream As System.IO.Stream = request.GetRequestStream()
+            Dim stream As Stream = request.GetRequestStream()
             stream.Write(bodyBytes, 0, bodyBytes.Length)
             stream.Close()
-            Dim response As System.Net.HttpWebResponse = CType(request.GetResponse(), System.Net.HttpWebResponse)
-            Dim reader As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream(), Encoding.UTF8)
+            Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+            Dim reader As StreamReader = New StreamReader(response.GetResponseStream(), Encoding.UTF8)
             result = reader.ReadToEnd()
+            MessageBox.Show("Статус изменён успешно")
         Catch e As Exception
+            MessageBox.Show("Вначале получите данные рецепта")
             result = "ERROR-ex" & e.Message
         End Try
-
         Return result
     End Function
 
@@ -73,20 +74,20 @@ Public Class Request
 
         Dim bmyrequest As Byte() = Nothing
         Dim rez_content As String = ""
-        Dim req As System.Net.HttpWebRequest = CType(System.Net.HttpWebRequest.Create(pUrl), System.Net.HttpWebRequest)
+        Dim req As HttpWebRequest = CType(HttpWebRequest.Create(pUrl), HttpWebRequest)
         Dim rpost As String = ""
 
         Try
             req.Timeout = 60000
             req.Method = "POST"
             req.ContentType = "application/json"
-            rpost = Newtonsoft.Json.JsonConvert.SerializeObject(pModel)
+            rpost = JsonConvert.SerializeObject(pModel)
             bmyrequest = Encoding.UTF8.GetBytes(rpost)
-            Dim str As System.IO.Stream = req.GetRequestStream()
+            Dim str As Stream = req.GetRequestStream()
             str.Write(bmyrequest, 0, bmyrequest.Length)
             str.Close()
-            Dim resp As System.Net.HttpWebResponse = CType(req.GetResponse(), System.Net.HttpWebResponse)
-            Dim StrRdr As System.IO.StreamReader = New System.IO.StreamReader(resp.GetResponseStream(), Encoding.UTF8)
+            Dim resp As HttpWebResponse = CType(req.GetResponse(), HttpWebResponse)
+            Dim StrRdr As StreamReader = New StreamReader(resp.GetResponseStream(), Encoding.UTF8)
             rez_content = StrRdr.ReadToEnd()
         Catch e As Exception
             rez_content = "ERROR-ex" & e.Message

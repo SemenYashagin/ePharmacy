@@ -80,7 +80,6 @@ D:\Codes VB\ePharmacy\bin\Debug\de\DevExpress.XtraTreeList.v15.1.resources.dll
 D:\Codes VB\ePharmacy\bin\Debug\es\DevExpress.XtraTreeList.v15.1.resources.dll
 D:\Codes VB\ePharmacy\bin\Debug\ja\DevExpress.XtraTreeList.v15.1.resources.dll
 D:\Codes VB\ePharmacy\bin\Debug\ru\DevExpress.XtraTreeList.v15.1.resources.dll
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbprojAssemblyReference.cache
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.MainForm.resources
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.Resources.resources
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbproj.GenerateResource.cache
@@ -90,3 +89,4 @@ D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbproj.CopyComplete
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.exe
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.xml
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.pdb
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbprojAssemblyReference.cache
