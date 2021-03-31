@@ -1,0 +1,51 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ePharmacy
+</name>
+</assembly>
+<members>
+<member name="T:ePharmacy.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ePharmacy.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ePharmacy.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:ePharmacy.MainForm.PutData">
+ <summary>
+ Entering data to MainForm
+ </summary>
+</member>
+<member name="M:ePharmacy.Request.GetRecipe(System.String)">
+ <summary>
+ 
+ </summary>
+ <param name="URI"></param>
+ <returns></returns>
+</member>
+<member name="M:ePharmacy.Views.EnterPatient(ePharmacy.eRecipe)">
+ <summary>
+ 
+ </summary>
+ <param name="recipe"></param>
+</member>
+<member name="M:ePharmacy.Views.ToDataTable(ePharmacy.eRecipe)">
+ <summary>
+ 
+ </summary>
+ <param name="recipes"></param>
+ <returns></returns>
+</member>
+</members>
+</doc>
