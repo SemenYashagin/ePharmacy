@@ -14,24 +14,8 @@ Public Class Pharmacy
     Public Property address As Address
 End Class
 
-Public Class Coordinates
-    Public Property latitude As Single
-    Public Property longitude As Single
-End Class
-
-Public Class Price
-    Public Property amount As Integer
-    Public Property currency As String
-    Public Property name As String
-End Class
-
-Public Class Finalprice
-    Public Property amount As Integer
-    Public Property currency As String
-    Public Property name As String
-End Class
-
 Public Class Packagecontent
     Public Property amount As Integer
     Public Property unit As String
 End Class
+

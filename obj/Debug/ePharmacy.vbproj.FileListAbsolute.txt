@@ -89,4 +89,5 @@ D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbproj.CopyComplete
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.exe
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.xml
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.pdb
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbprojAssemblyReference.cache
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.RecipesForm.resources
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.Orders.resources

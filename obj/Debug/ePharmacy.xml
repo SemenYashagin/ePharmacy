@@ -22,12 +22,12 @@ ePharmacy
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
-<member name="M:ePharmacy.MainForm.PutData">
+<member name="M:ePharmacy.MainForm.PutDatafromID">
  <summary>
  Entering data to MainForm
  </summary>
 </member>
-<member name="M:ePharmacy.Request.GetRecipe(System.String)">
+<member name="M:ePharmacy.Request.GetRecipebyId(System.String)">
  <summary>
  
  </summary>

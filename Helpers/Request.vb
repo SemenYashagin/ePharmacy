@@ -10,7 +10,7 @@ Public Class Request
     ''' </summary>
     ''' <param name="URI"></param>
     ''' <returns></returns>
-    Public Shared Function GetRecipe(ByVal URI As String) As String
+    Public Shared Function GetRecipebyId(ByVal URI As String) As String
         Dim rez_content As String = ""
         Dim request As HttpWebRequest = CType(WebRequest.Create(URI), HttpWebRequest)
         request.Method = "GET"
@@ -24,6 +24,9 @@ Public Class Request
 
                     Using reader As StreamReader = New StreamReader(stream)
                         rez_content = reader.ReadToEnd()
+                        If (rez_content = "[]") Then
+                            MessageBox.Show("Вы ввели неверный код")
+                        End If
                     End Using
                 End Using
             End Using
@@ -61,39 +64,4 @@ Public Class Request
         End Try
         Return result
     End Function
-
-
-    Public Shared Function PostRequestForModelToString(ByVal pUrl As String, ByVal pModel As Object) As String
-        'because we don't have TLS 1.2 in .Net 4.0
-        Const _Tls12 As SslProtocols = DirectCast(&HC00, SslProtocols)
-        Const Tls12 As SecurityProtocolType = DirectCast(_Tls12, SecurityProtocolType)
-        ServicePointManager.SecurityProtocol = Tls12
-        'because we don't have TLS 1.2 in .Net 4.0
-
-        'System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 'if we have .Net 4.5 and more
-
-        Dim bmyrequest As Byte() = Nothing
-        Dim rez_content As String = ""
-        Dim req As HttpWebRequest = CType(HttpWebRequest.Create(pUrl), HttpWebRequest)
-        Dim rpost As String = ""
-
-        Try
-            req.Timeout = 60000
-            req.Method = "POST"
-            req.ContentType = "application/json"
-            rpost = JsonConvert.SerializeObject(pModel)
-            bmyrequest = Encoding.UTF8.GetBytes(rpost)
-            Dim str As Stream = req.GetRequestStream()
-            str.Write(bmyrequest, 0, bmyrequest.Length)
-            str.Close()
-            Dim resp As HttpWebResponse = CType(req.GetResponse(), HttpWebResponse)
-            Dim StrRdr As StreamReader = New StreamReader(resp.GetResponseStream(), Encoding.UTF8)
-            rez_content = StrRdr.ReadToEnd()
-        Catch e As Exception
-            rez_content = "ERROR-ex" & e.Message
-        End Try
-
-        Return rez_content
-    End Function
-
 End Class

@@ -12,11 +12,17 @@ Public Class eRecipe
     Public Property clinic As Clinic
     Public Property patient As Patient
     Public Property doctor As Doctor
+    Public Property diagnosis As Diagnosis
     Public Property medications As Medication()
     Public Property createdBy As String
     Public Property lastUpdateDate As Date
     Public Property name As String
-    Public Property orders As Object()
+    Public Property orders As Order()
+End Class
+
+Public Class Diagnosis
+    Public Property code As String
+    Public Property name As String
 End Class
 
 Public Class Status
@@ -117,4 +123,53 @@ Public Class Product
     Public Property medicine As String
     Public Property dosage As Dosage
     Public Property medicationForm As Medicationform
+End Class
+
+Public Class Order
+    Public Property _id As String
+    Public Property creationDate As Date
+    Public Property userId As String
+    Public Property lastUpdateDate As Date
+    Public Property paid As Boolean
+    Public Property status As Status
+    Public Property reception As Reception
+    Public Property products As Product()
+    Public Property payment As Payment
+    Public Property price As Price
+    Public Property finalPrice As Finalprice
+End Class
+
+Public Class Reception
+    Public Property type As String
+    Public Property name As String
+    Public Property address As Address
+    Public Property store As Store
+End Class
+
+Public Class Coordinates
+    Public Property latitude As Single
+    Public Property longitude As Single
+End Class
+
+Public Class Store
+    Public Property address As Address
+    Public Property name As String
+    Public Property code As String
+End Class
+
+Public Class Payment
+    Public Property type As String
+    Public Property name As String
+End Class
+
+Public Class Price
+    Public Property amount As Integer
+    Public Property name As String
+    Public Property currency As String
+End Class
+
+Public Class Finalprice
+    Public Property amount As Integer
+    Public Property name As String
+    Public Property currency As String
 End Class

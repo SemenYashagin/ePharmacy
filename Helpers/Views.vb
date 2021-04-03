@@ -30,6 +30,9 @@ Public Class Views
 
         Catch ex As KeyNotFoundException
             MessageBox.Show("Для изменения статуса рецепта сначала получите его")
+
+        Catch err As System.NullReferenceException
+            MessageBox.Show("Неверно указан номер рецепта")
         End Try
         Return result
     End Function
@@ -48,6 +51,8 @@ Public Class Views
     ''' </summary>
     ''' <param name="recipe"></param>
     Public Shared Sub EnterPatient(recipe As eRecipe)
+        Dim currentdata As DateTime = DateTime.Now
+
         If recipe.patient.firstName = Nothing Then MainForm.tbFirstname.Text = "" Else MainForm.tbFirstname.Text = recipe.patient.firstName
         If recipe.patient.lastName = Nothing Then MainForm.tbSurname.Text = "" Else MainForm.tbSurname.Text = recipe.patient.lastName
         If recipe.patient.middleName = Nothing Then MainForm.tbMiddlename.Text = "" Else MainForm.tbMiddlename.Text = recipe.patient.middleName
@@ -60,9 +65,12 @@ Public Class Views
             If recipe.patient.OMS.number = Nothing Then MainForm.tbOMS.Text = "" Else MainForm.tbOMS.Text = recipe.patient.OMS.number
         End If
 
+        If (recipe.orders.Length = 0) Then MainForm.tbQuantityOrders.Text = "0" Else MainForm.tbQuantityOrders.Text = recipe.orders.Length
+        If (recipe.dueDate > currentdata) Then MainForm.tbDueDate.BackColor = Color.FromArgb(192, 255, 192) Else MainForm.tbDueDate.BackColor = Color.FromArgb(255, 192, 192)
         If recipe.dueDate = Nothing Then MainForm.tbDueDate.Text = "" Else MainForm.tbDueDate.Text = recipe.dueDate
         If recipe.status.name = Nothing Then MainForm.cbRecipeStatus.Text = "" Else MainForm.cbRecipeStatus.Text = recipe.status.name
         If recipe.patient.sex = Nothing Then MainForm.tbSex.Text = "" Else If recipe.patient.sex = 1 Then MainForm.tbSex.Text = "муж" Else MainForm.tbSex.Text = "жен"
+        If recipe.status.name = Nothing Then MainForm.tbCurrentStatus.Text = "" Else MainForm.tbCurrentStatus.Text = recipe.status.name
     End Sub
 
     ''' <summary>
@@ -149,6 +157,4 @@ Public Class Views
 
         Return table
     End Function
-
-
 End Class
