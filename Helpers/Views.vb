@@ -1,8 +1,8 @@
 ﻿Imports Newtonsoft.Json
 
 Public Class Views
-
-    Public Shared Function UpdateRecipestatus() As String
+    'Dim main As MainForm
+    Public Shared Function UpdateRecipestatus(main As MainForm) As String
         Dim result As String = ""
         Try
             Dim recipeStatus As Dictionary(Of String, String) = New Dictionary(Of String, String) From {
@@ -20,12 +20,12 @@ Public Class Views
             Dim stat = New Status
             Dim status = New NewStatus
             status.status = stat
-            status.status.name = MainForm.cbRecipeStatus.Text
-            status.status.type = recipeStatus.Item(MainForm.cbRecipeStatus.Text)
+            status.status.name = main.cbRecipeStatus.Text
+            status.status.type = recipeStatus.Item(main.cbRecipeStatus.Text)
 
             Dim newStatus As String = JsonConvert.SerializeObject(status)
 
-            Dim barcode As Prescription = JsonConvert.DeserializeObject(Of Prescription)(MainForm.tbRecipeID.Text)
+            Dim barcode As Prescription = JsonConvert.DeserializeObject(Of Prescription)(main.tbRecipeID.Text)
             result = Request.UpdateRecipeByID("https://pharmacy.test.1er.app/api/v1/prescriptions", status, barcode.documentId)
 
         Catch ex As KeyNotFoundException
@@ -33,44 +33,46 @@ Public Class Views
 
         Catch err As System.NullReferenceException
             MessageBox.Show("Неверно указан номер рецепта")
+        Catch e As Newtonsoft.Json.JsonReaderException
+            MessageBox.Show("Неверно указан ID рецепта")
         End Try
         Return result
     End Function
 
-    Public Shared Sub ClearTextboxes(ByVal control As Control)
+    Public Shared Sub ClearTextboxes(ByVal control As Control, main As MainForm)
         For Each c In control.Controls
             If TypeOf c Is TextBox Then CType(c, TextBox).Text = String.Empty
-            ClearTextboxes(c)
+            ClearTextboxes(c, main)
         Next
-        MainForm.GridControl1.DataSource = Nothing
-        MainForm.cbRecipeStatus.Text = Nothing
+        main.GridControl1.DataSource = Nothing
+        main.cbRecipeStatus.Text = Nothing
     End Sub
 
     ''' <summary>
     ''' 
     ''' </summary>
     ''' <param name="recipe"></param>
-    Public Shared Sub EnterPatient(recipe As eRecipe)
+    Public Shared Sub EnterPatient(recipe As eRecipe, main As MainForm)
         Dim currentdata As DateTime = DateTime.Now
 
-        If recipe.patient.firstName = Nothing Then MainForm.tbFirstname.Text = "" Else MainForm.tbFirstname.Text = recipe.patient.firstName
-        If recipe.patient.lastName = Nothing Then MainForm.tbSurname.Text = "" Else MainForm.tbSurname.Text = recipe.patient.lastName
-        If recipe.patient.middleName = Nothing Then MainForm.tbMiddlename.Text = "" Else MainForm.tbMiddlename.Text = recipe.patient.middleName
-        If recipe.patient.birthDate = Nothing Then MainForm.tbBirthday.Text = "" Else MainForm.tbBirthday.Text = recipe.patient.birthDate
-        If recipe.patient.SNILS = Nothing Then MainForm.tbSnils.Text = "" Else MainForm.tbSnils.Text = recipe.patient.SNILS
+        If recipe.patient.firstName = Nothing Then main.tbFirstname.Text = "" Else main.tbFirstname.Text = recipe.patient.firstName
+        If recipe.patient.lastName = Nothing Then main.tbSurname.Text = "" Else main.tbSurname.Text = recipe.patient.lastName
+        If recipe.patient.middleName = Nothing Then main.tbMiddlename.Text = "" Else main.tbMiddlename.Text = recipe.patient.middleName
+        If recipe.patient.birthDate = Nothing Then main.tbBirthday.Text = "" Else main.tbBirthday.Text = recipe.patient.birthDate
+        If recipe.patient.SNILS = Nothing Then main.tbSnils.Text = "" Else main.tbSnils.Text = recipe.patient.SNILS
 
         If IsNothing(recipe.patient.OMS) Then
-            MainForm.tbOMS.Text = ""
+            main.tbOMS.Text = ""
         Else
-            If recipe.patient.OMS.number = Nothing Then MainForm.tbOMS.Text = "" Else MainForm.tbOMS.Text = recipe.patient.OMS.number
+            If recipe.patient.OMS.number = Nothing Then main.tbOMS.Text = "" Else main.tbOMS.Text = recipe.patient.OMS.number
         End If
 
-        If (recipe.orders.Length = 0) Then MainForm.tbQuantityOrders.Text = "0" Else MainForm.tbQuantityOrders.Text = recipe.orders.Length
-        If (recipe.dueDate > currentdata) Then MainForm.tbDueDate.BackColor = Color.FromArgb(192, 255, 192) Else MainForm.tbDueDate.BackColor = Color.FromArgb(255, 192, 192)
-        If recipe.dueDate = Nothing Then MainForm.tbDueDate.Text = "" Else MainForm.tbDueDate.Text = recipe.dueDate
-        If recipe.status.name = Nothing Then MainForm.cbRecipeStatus.Text = "" Else MainForm.cbRecipeStatus.Text = recipe.status.name
-        If recipe.patient.sex = Nothing Then MainForm.tbSex.Text = "" Else If recipe.patient.sex = 1 Then MainForm.tbSex.Text = "муж" Else MainForm.tbSex.Text = "жен"
-        If recipe.status.name = Nothing Then MainForm.tbCurrentStatus.Text = "" Else MainForm.tbCurrentStatus.Text = recipe.status.name
+        If (recipe.orders.Length = 0) Then main.tbQuantityOrders.Text = "0" Else main.tbQuantityOrders.Text = recipe.orders.Length
+        If (recipe.dueDate > currentdata) Then main.tbDueDate.BackColor = Color.FromArgb(192, 255, 192) Else main.tbDueDate.BackColor = Color.FromArgb(255, 192, 192)
+        If recipe.dueDate = Nothing Then main.tbDueDate.Text = "" Else main.tbDueDate.Text = recipe.dueDate
+        If recipe.status.name = Nothing Then main.cbRecipeStatus.Text = "" Else main.cbRecipeStatus.Text = recipe.status.name
+        If recipe.patient.sex = Nothing Then main.tbSex.Text = "" Else If recipe.patient.sex = 1 Then main.tbSex.Text = "муж" Else main.tbSex.Text = "жен"
+        If recipe.status.name = Nothing Then main.tbCurrentStatus.Text = "" Else main.tbCurrentStatus.Text = recipe.status.name
     End Sub
 
     ''' <summary>
@@ -129,8 +131,6 @@ Public Class Views
             row = table.NewRow()
 
             If (unit.medicine.name <> Nothing) Then row(0) = unit.medicine.name Else row(0) = ""
-            'row(0) = unit.medicine.name
-
             If IsNothing(unit.products) Then
                 row(1) = ""
             Else
@@ -141,17 +141,9 @@ Public Class Views
             End If
 
             If (unit.medicationForm.name <> Nothing) Then row(2) = unit.medicationForm.name Else row(2) = ""
-            'row(2) = unit.medicationForm.name
-
             If (unit.dosage.text <> Nothing) Then row(3) = unit.dosage.text Else row(3) = ""
-            'row(3) = unit.dosage.text
-
             If (unit.intakeSchedule.text <> Nothing) Then row(4) = unit.intakeSchedule.text Else row(4) = ""
-            'row(4) = unit.intakeSchedule.text
-
             If (unit.totalAmount <> Nothing) Then row(5) = unit.totalAmount Else row(5) = ""
-            'row(5) = unit.totalAmount
-
             table.Rows.Add(row)
         Next
 

@@ -34,7 +34,7 @@ ePharmacy
  <param name="URI"></param>
  <returns></returns>
 </member>
-<member name="M:ePharmacy.Views.EnterPatient(ePharmacy.eRecipe)">
+<member name="M:ePharmacy.Views.EnterPatient(ePharmacy.eRecipe,ePharmacy.MainForm)">
  <summary>
  
  </summary>

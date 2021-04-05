@@ -2,9 +2,7 @@
 Imports ePharmacy.Views
 
 Public Class MainForm
-
-    Public Sub MainForm()
-    End Sub
+    'Dim view As Views
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnGetRecipe.Click
         If cbMethod.Text = "" Then
@@ -26,19 +24,19 @@ Public Class MainForm
             Dim prep As Prescription = JsonConvert.DeserializeObject(Of Prescription)(QRcode)
             Dim str As String = Request.GetRecipebyId("https://pharmacy.test.1er.app/api/v1/prescriptions/" + prep.documentId)
             Dim recipe As eRecipe = JsonConvert.DeserializeObject(Of eRecipe)(str)
-            EnterPatient(recipe)
+            Views.EnterPatient(recipe, Me)
             Dim data As DataTable = ToDataTable(recipe)
             GridControl1.DataSource = data
             GridView1.BestFitColumns(True) 'this shit for the best fitting of the widths of columns based on the context
         Catch err As Newtonsoft.Json.JsonSerializationException
             MessageBox.Show("QR код считался неккоректно")
-            ClearTextboxes(Me) 'clear all textboxes and griddata
+            Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
         Catch ex As SystemException
             MessageBox.Show("Рецепт не найден ")
-            ClearTextboxes(Me) 'clear all textboxes and griddata
+            Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
         Catch er As JsonReaderException
             MessageBox.Show("QR код считался неккоректно")
-            ClearTextboxes(Me) 'clear all textboxes and griddata
+            Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
         End Try
     End Sub
 
@@ -49,7 +47,7 @@ Public Class MainForm
 
             Dim recipe As eRecipe() = JsonConvert.DeserializeObject(Of eRecipe())(str)
             If (recipe.Length = 1) Then
-                EnterPatient(recipe(0))
+                Views.EnterPatient(recipe(0), Me)
                 Dim data As DataTable = ToDataTable(recipe(0))
                 GridControl1.DataSource = data
                 GridView1.BestFitColumns(True) 'this shit for the best fitting of the widths of columns based on the context
@@ -58,16 +56,16 @@ Public Class MainForm
             ElseIf (recipe.Length > 1) Then
                 Dim eRecipes As RecipesForm = New RecipesForm()
                 eRecipes.Activate()
-                eRecipes.RecipesForm()
+                eRecipes.RecipesForm(Me)
                 eRecipes.ShowDialog()
                 GridView1.BestFitColumns(True)
             End If
         Catch ex As SystemException
             MessageBox.Show("Рецепт не найден ")
-            ClearTextboxes(Me) 'clear all textboxes and griddata
+            Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
         Catch er As JsonReaderException
             MessageBox.Show("Вы ввели неверный код")
-            ClearTextboxes(Me) 'clear all textboxes and griddata
+            Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
         End Try
     End Sub
 
@@ -85,22 +83,28 @@ Public Class MainForm
     End Sub
 
     Private Sub btnSwitch_RecipeStatus_Click(sender As Object, e As EventArgs) Handles btnSwitch_RecipeStatus.Click
-        UpdateRecipestatus()
+        Views.UpdateRecipestatus(Me)
         PutDatafromID()
     End Sub
 
     Private Function GetRecipebyQR() As eRecipe
         Dim QRcode As String = tbRecipeID.Text
-        Dim prep As Prescription = JsonConvert.DeserializeObject(Of Prescription)(QRcode)
-        Dim str As String = Request.GetRecipebyId("https://pharmacy.test.1er.app/api/v1/prescriptions/" + prep.documentId)
-        Dim recipe As eRecipe = JsonConvert.DeserializeObject(Of eRecipe)(str)
+        Dim recipe As eRecipe = Nothing
+        Try
+            Dim prep As Prescription = JsonConvert.DeserializeObject(Of Prescription)(QRcode)
+            Dim str As String = Request.GetRecipebyId("https://pharmacy.test.1er.app/api/v1/prescriptions/" + prep.documentId)
+            recipe = JsonConvert.DeserializeObject(Of eRecipe)(str)
+        Catch e As System.NullReferenceException
+            MessageBox.Show("Некорректные данные")
+        End Try
         Return recipe
     End Function
 
     Private Sub btnlastOrders_Click(sender As Object, e As EventArgs) Handles btnlastOrders.Click
         Dim recipe As eRecipe = GetRecipebyQR()
-        Orders.Activate()
-        Orders.Orders(recipe)
-        Orders.ShowDialog()
+        Dim order As Orders = New Orders()
+        order.Activate()
+        order.Orders(recipe)
+        order.ShowDialog()
     End Sub
 End Class

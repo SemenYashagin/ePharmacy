@@ -6,8 +6,15 @@ Imports Newtonsoft.Json
 
 Public Class PostOrder
 
+    Public Sub NewRecipe()
+        Dim main As MainForm = New MainForm()
+        main.Activate()
+        main.ShowDialog()
+    End Sub
+
     Private Shared Function GetId() As String
-        Dim QRcode As String = MainForm.tbRecipeID.Text
+        Dim main As MainForm = New MainForm()
+        Dim QRcode As String = main.tbRecipeID.Text
         Dim prep As Prescription = JsonConvert.DeserializeObject(Of Prescription)(QRcode)
         Return prep.documentId
     End Function
@@ -17,7 +24,7 @@ Public Class PostOrder
         Const Tls12 As SecurityProtocolType = DirectCast(_Tls12, SecurityProtocolType)
         ServicePointManager.SecurityProtocol = Tls12
 
-        Order.prescriptionId = GetId()
+        Order.prescriptionId = GetId() 'delete
 
         Dim bmyrequest As Byte() = Nothing
         Dim rez_content As String = ""

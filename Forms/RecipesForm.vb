@@ -1,9 +1,12 @@
 ﻿Imports Newtonsoft.Json
+Imports ePharmacy.MainForm
 
 Public Class RecipesForm
     Private patients As List(Of Tuple(Of String, String, eRecipe)) = New List(Of Tuple(Of String, String, eRecipe))
-    Public Sub RecipesForm()
-        Dim code As String = MainForm.tbRecipeID.Text
+    Private mainForm As MainForm
+    Public Sub RecipesForm(main As MainForm)
+        Dim code As String = main.tbRecipeID.Text
+        mainForm = main
         GetRecipeCode(code)
     End Sub
 
@@ -27,17 +30,21 @@ Public Class RecipesForm
     End Sub
 
     Private Sub btnChoose_Click(sender As Object, e As EventArgs) Handles btnChoose.Click
+
         For Each person As Tuple(Of String, String, eRecipe) In patients
             Dim indexComma As Integer = cbListofRecipes.Text.IndexOf(",")
             Dim id As String = cbListofRecipes.Text.Remove(0, indexComma + 2)
             If (person.Item2 = id) Then
-                Views.EnterPatient(person.Item3)
+                Views.EnterPatient(person.Item3, mainForm)
                 Dim data As DataTable = Views.ToDataTable(person.Item3)
-                MainForm.GridControl1.DataSource = data
-                MainForm.UpdateStatusForm(person.Item3)
+                mainForm.GridControl1.DataSource = data
+                mainForm.UpdateStatusForm(person.Item3)
                 Close()
                 Exit For
             End If
         Next
     End Sub
+
+
+
 End Class

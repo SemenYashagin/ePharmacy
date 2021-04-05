@@ -1,3 +1,4 @@
+D:\Codes VB\ePharmacy\bin\Debug\ePharmacy.dll
 D:\Codes VB\ePharmacy\bin\Debug\ePharmacy.pdb
 D:\Codes VB\ePharmacy\bin\Debug\ePharmacy.xml
 D:\Codes VB\ePharmacy\bin\Debug\DevExpress.Data.v15.1.dll
@@ -80,14 +81,14 @@ D:\Codes VB\ePharmacy\bin\Debug\es\DevExpress.XtraTreeList.v15.1.resources.dll
 D:\Codes VB\ePharmacy\bin\Debug\ja\DevExpress.XtraTreeList.v15.1.resources.dll
 D:\Codes VB\ePharmacy\bin\Debug\ru\DevExpress.XtraTreeList.v15.1.resources.dll
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.MainForm.resources
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.Orders.resources
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.RecipesForm.resources
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.Resources.resources
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbproj.GenerateResource.cache
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbproj.CoreCompileInputs.cache
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.vbproj.CopyComplete
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacyDll.vbproj.GenerateResource.cache
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.dll.licenses
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacyDll.vbproj.CoreCompileInputs.cache
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacyDll.vbproj.CopyComplete
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.dll
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.xml
 D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.pdb
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.RecipesForm.resources
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.Orders.resources
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.dll.licenses
-D:\Codes VB\ePharmacy\bin\Debug\ePharmacy.dll
-D:\Codes VB\ePharmacy\obj\Debug\ePharmacy.dll
+D:\Codes VB\ePharmacy\obj\Debug\ePharmacyDll.vbprojAssemblyReference.cache
