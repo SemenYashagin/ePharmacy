@@ -23,7 +23,6 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Me.btnGetRecipe = New System.Windows.Forms.Button()
         Me.tbRecipeID = New System.Windows.Forms.TextBox()
         Me.tbMedcardNumber = New System.Windows.Forms.TextBox()
         Me.lbMedcardNumber = New System.Windows.Forms.Label()
@@ -42,6 +41,7 @@ Partial Class MainForm
         Me.lbSurname = New System.Windows.Forms.Label()
         Me.tbSnils = New System.Windows.Forms.TextBox()
         Me.gbPatientInfo = New System.Windows.Forms.GroupBox()
+        Me.lbRecipeID = New System.Windows.Forms.Label()
         Me.tbCurrentStatus = New System.Windows.Forms.TextBox()
         Me.lbCurrentStatus = New System.Windows.Forms.Label()
         Me.tbDueDate = New System.Windows.Forms.TextBox()
@@ -57,37 +57,29 @@ Partial Class MainForm
         Me.clmTotalamount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemRichTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.tbQuantityOrders = New System.Windows.Forms.TextBox()
+        Me.btnlastOrders = New System.Windows.Forms.Button()
+        Me.lbOrders = New System.Windows.Forms.Label()
         Me.cbRecipeStatus = New System.Windows.Forms.ComboBox()
         Me.btnSwitch_RecipeStatus = New System.Windows.Forms.Button()
         Me.lbRecipeStatus = New System.Windows.Forms.Label()
-        Me.cbMethod = New System.Windows.Forms.ComboBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.lbOrders = New System.Windows.Forms.Label()
-        Me.tbQuantityOrders = New System.Windows.Forms.TextBox()
-        Me.btnlastOrders = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.cbchooseRecipe = New System.Windows.Forms.ComboBox()
         Me.gbPatientInfo.SuspendLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemRichTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnGetRecipe
-        '
-        Me.btnGetRecipe.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.btnGetRecipe.Location = New System.Drawing.Point(357, 21)
-        Me.btnGetRecipe.Name = "btnGetRecipe"
-        Me.btnGetRecipe.Size = New System.Drawing.Size(122, 25)
-        Me.btnGetRecipe.TabIndex = 0
-        Me.btnGetRecipe.Text = "Получить рецепт"
-        Me.btnGetRecipe.UseVisualStyleBackColor = True
         '
         'tbRecipeID
         '
-        Me.tbRecipeID.Location = New System.Drawing.Point(141, 22)
+        Me.tbRecipeID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.tbRecipeID.Location = New System.Drawing.Point(257, 379)
         Me.tbRecipeID.Name = "tbRecipeID"
+        Me.tbRecipeID.ReadOnly = True
         Me.tbRecipeID.Size = New System.Drawing.Size(210, 22)
         Me.tbRecipeID.TabIndex = 1
         '
@@ -253,6 +245,7 @@ Partial Class MainForm
         '
         'gbPatientInfo
         '
+        Me.gbPatientInfo.Controls.Add(Me.lbRecipeID)
         Me.gbPatientInfo.Controls.Add(Me.tbCurrentStatus)
         Me.gbPatientInfo.Controls.Add(Me.lbCurrentStatus)
         Me.gbPatientInfo.Controls.Add(Me.tbDueDate)
@@ -274,12 +267,23 @@ Partial Class MainForm
         Me.gbPatientInfo.Controls.Add(Me.tbSurname)
         Me.gbPatientInfo.Controls.Add(Me.lbSurname)
         Me.gbPatientInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.gbPatientInfo.Location = New System.Drawing.Point(12, 12)
+        Me.gbPatientInfo.Location = New System.Drawing.Point(8, 73)
         Me.gbPatientInfo.Name = "gbPatientInfo"
-        Me.gbPatientInfo.Size = New System.Drawing.Size(498, 314)
+        Me.gbPatientInfo.Size = New System.Drawing.Size(498, 335)
         Me.gbPatientInfo.TabIndex = 32
         Me.gbPatientInfo.TabStop = False
         Me.gbPatientInfo.Text = "Данные пациента"
+        '
+        'lbRecipeID
+        '
+        Me.lbRecipeID.AutoSize = True
+        Me.lbRecipeID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbRecipeID.ForeColor = System.Drawing.Color.Maroon
+        Me.lbRecipeID.Location = New System.Drawing.Point(22, 307)
+        Me.lbRecipeID.Name = "lbRecipeID"
+        Me.lbRecipeID.Size = New System.Drawing.Size(89, 16)
+        Me.lbRecipeID.TabIndex = 36
+        Me.lbRecipeID.Text = "ID рецепта"
         '
         'tbCurrentStatus
         '
@@ -323,11 +327,11 @@ Partial Class MainForm
         '
         'GridControl1
         '
-        Me.GridControl1.Location = New System.Drawing.Point(6, 105)
+        Me.GridControl1.Location = New System.Drawing.Point(6, 90)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
         Me.GridControl1.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemRichTextEdit1, Me.RepositoryItemMemoEdit1})
-        Me.GridControl1.Size = New System.Drawing.Size(486, 118)
+        Me.GridControl1.Size = New System.Drawing.Size(486, 130)
         Me.GridControl1.TabIndex = 33
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -436,17 +440,46 @@ Partial Class MainForm
         Me.GroupBox1.Controls.Add(Me.GridControl1)
         Me.GroupBox1.Controls.Add(Me.lbRecipeStatus)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 401)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 414)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(498, 229)
         Me.GroupBox1.TabIndex = 34
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Рецепт"
         '
+        'tbQuantityOrders
+        '
+        Me.tbQuantityOrders.Location = New System.Drawing.Point(138, 60)
+        Me.tbQuantityOrders.Name = "tbQuantityOrders"
+        Me.tbQuantityOrders.ReadOnly = True
+        Me.tbQuantityOrders.Size = New System.Drawing.Size(210, 22)
+        Me.tbQuantityOrders.TabIndex = 41
+        '
+        'btnlastOrders
+        '
+        Me.btnlastOrders.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.btnlastOrders.Location = New System.Drawing.Point(357, 59)
+        Me.btnlastOrders.Name = "btnlastOrders"
+        Me.btnlastOrders.Size = New System.Drawing.Size(122, 25)
+        Me.btnlastOrders.TabIndex = 40
+        Me.btnlastOrders.Text = "Просмотреть"
+        Me.btnlastOrders.UseVisualStyleBackColor = True
+        '
+        'lbOrders
+        '
+        Me.lbOrders.AutoSize = True
+        Me.lbOrders.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbOrders.ForeColor = System.Drawing.Color.Maroon
+        Me.lbOrders.Location = New System.Drawing.Point(11, 63)
+        Me.lbOrders.Name = "lbOrders"
+        Me.lbOrders.Size = New System.Drawing.Size(115, 16)
+        Me.lbOrders.TabIndex = 39
+        Me.lbOrders.Text = "Купленные ЛП"
+        '
         'cbRecipeStatus
         '
         Me.cbRecipeStatus.FormattingEnabled = True
-        Me.cbRecipeStatus.Items.AddRange(New Object() {"Выписан", "Испорчен", "Не обработан", "Отпущен", "Отпущен частично", "Отсрочен", "Отложен", "Получен фармуправлением", "Передан в РМИС"})
+        Me.cbRecipeStatus.Items.AddRange(New Object() {"Выписан", "Испорчен", "Отпущен", "Отпущен частично"})
         Me.cbRecipeStatus.Location = New System.Drawing.Point(138, 20)
         Me.cbRecipeStatus.Name = "cbRecipeStatus"
         Me.cbRecipeStatus.Size = New System.Drawing.Size(210, 24)
@@ -473,64 +506,33 @@ Partial Class MainForm
         Me.lbRecipeStatus.TabIndex = 34
         Me.lbRecipeStatus.Text = "Статус рецепта"
         '
-        'cbMethod
+        'GroupBox3
         '
-        Me.cbMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMethod.FormattingEnabled = True
-        Me.cbMethod.Items.AddRange(New Object() {"QR-код", "Код рецепта"})
-        Me.cbMethod.Location = New System.Drawing.Point(14, 22)
-        Me.cbMethod.Name = "cbMethod"
-        Me.cbMethod.Size = New System.Drawing.Size(121, 24)
-        Me.cbMethod.TabIndex = 39
+        Me.GroupBox3.Controls.Add(Me.cbchooseRecipe)
+        Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox3.Location = New System.Drawing.Point(8, 4)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(498, 63)
+        Me.GroupBox3.TabIndex = 36
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Номер рецепта"
         '
-        'GroupBox2
+        'cbchooseRecipe
         '
-        Me.GroupBox2.Controls.Add(Me.cbMethod)
-        Me.GroupBox2.Controls.Add(Me.tbRecipeID)
-        Me.GroupBox2.Controls.Add(Me.btnGetRecipe)
-        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 332)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(498, 63)
-        Me.GroupBox2.TabIndex = 35
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Уник. номер рецепта"
-        '
-        'lbOrders
-        '
-        Me.lbOrders.AutoSize = True
-        Me.lbOrders.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbOrders.ForeColor = System.Drawing.Color.Maroon
-        Me.lbOrders.Location = New System.Drawing.Point(11, 63)
-        Me.lbOrders.Name = "lbOrders"
-        Me.lbOrders.Size = New System.Drawing.Size(115, 16)
-        Me.lbOrders.TabIndex = 39
-        Me.lbOrders.Text = "Купленные ЛП"
-        '
-        'tbQuantityOrders
-        '
-        Me.tbQuantityOrders.Location = New System.Drawing.Point(138, 60)
-        Me.tbQuantityOrders.Name = "tbQuantityOrders"
-        Me.tbQuantityOrders.ReadOnly = True
-        Me.tbQuantityOrders.Size = New System.Drawing.Size(210, 22)
-        Me.tbQuantityOrders.TabIndex = 41
-        '
-        'btnlastOrders
-        '
-        Me.btnlastOrders.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.btnlastOrders.Location = New System.Drawing.Point(357, 59)
-        Me.btnlastOrders.Name = "btnlastOrders"
-        Me.btnlastOrders.Size = New System.Drawing.Size(122, 25)
-        Me.btnlastOrders.TabIndex = 40
-        Me.btnlastOrders.Text = "Просмотреть"
-        Me.btnlastOrders.UseVisualStyleBackColor = True
+        Me.cbchooseRecipe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbchooseRecipe.FormattingEnabled = True
+        Me.cbchooseRecipe.Location = New System.Drawing.Point(14, 21)
+        Me.cbchooseRecipe.Name = "cbchooseRecipe"
+        Me.cbchooseRecipe.Size = New System.Drawing.Size(465, 24)
+        Me.cbchooseRecipe.TabIndex = 0
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(518, 637)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.ClientSize = New System.Drawing.Size(513, 646)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.tbRecipeID)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.gbPatientInfo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -546,13 +548,11 @@ Partial Class MainForm
         CType(Me.RepositoryItemRichTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents btnGetRecipe As Button
     Friend WithEvents tbRecipeID As TextBox
     Friend WithEvents tbMedcardNumber As TextBox
     Friend WithEvents lbMedcardNumber As Label
@@ -587,11 +587,12 @@ Partial Class MainForm
     Private WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents btnSwitch_RecipeStatus As Button
     Friend WithEvents cbRecipeStatus As ComboBox
-    Friend WithEvents cbMethod As ComboBox
-    Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents tbCurrentStatus As TextBox
     Friend WithEvents lbCurrentStatus As Label
     Friend WithEvents tbQuantityOrders As TextBox
     Friend WithEvents btnlastOrders As Button
     Friend WithEvents lbOrders As Label
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents cbchooseRecipe As ComboBox
+    Friend WithEvents lbRecipeID As Label
 End Class

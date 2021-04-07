@@ -22,7 +22,7 @@ ePharmacy
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
-<member name="M:ePharmacy.MainForm.PutDatafromID">
+<member name="M:ePharmacy.MainForm.PutDatafromID(System.String)">
  <summary>
  Entering data to MainForm
  </summary>

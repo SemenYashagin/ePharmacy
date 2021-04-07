@@ -5,33 +5,24 @@ Imports System.Text
 Imports Newtonsoft.Json
 
 Public Class PostOrder
-
-    Public Sub NewRecipe()
-        Dim main As MainForm = New MainForm()
+    Property SelectedId As String = Nothing
+    Public Sub GetRecipe(shortcode As String, qrcode As String)
+        Dim main As New MainForm(Me)
         main.Activate()
-        main.ShowDialog()
+        main.NewClass(shortcode, qrcode)
+        main.Show()
     End Sub
 
-    Private Shared Function GetId() As String
-        Dim main As MainForm = New MainForm()
-        Dim QRcode As String = main.tbRecipeID.Text
-        Dim prep As Prescription = JsonConvert.DeserializeObject(Of Prescription)(QRcode)
-        Return prep.documentId
-    End Function
-
-    Public Shared Function PostRequest(ByVal Order As PharmacyOrder) As String
+    Public Function PostRequest(ByVal Order As PharmacyOrder) As String
         Const _Tls12 As SslProtocols = DirectCast(&HC00, SslProtocols)
         Const Tls12 As SecurityProtocolType = DirectCast(_Tls12, SecurityProtocolType)
         ServicePointManager.SecurityProtocol = Tls12
-
-        Order.prescriptionId = GetId() 'delete
 
         Dim bmyrequest As Byte() = Nothing
         Dim rez_content As String = ""
         Dim Url As String = "https://pharmacy.test.1er.app/api/v1/orders"
         Dim request As HttpWebRequest = CType(HttpWebRequest.Create(Url), HttpWebRequest)
         request.Headers.Add("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoLnRlc3QuMWVyLmFwcCIsInN1YiI6IjYwNGI0ODMxMDQ5MWJhNmJ" & "lNjBlZmNmMyIsImlhdCI6MTYxNTU0NzAyNywidXNlcklkIjoiNjA0YjQ4MzEwNDkxYmE2YmU2MGVmY2YzIiwidXNlciI6eyJfaWQiOiI2MDRiNDgzMTA0OTFiYTZiZTYw" & "ZWZjZjMiLCJyb2xlcyI6WyJJTlRFR1JBVElPTiJdLCJyb2xlIjoiSU5URUdSQVRJT04iLCJjaGlsZHJlbiI6W119LCJleHAiOjE2NDcwODMwMjd9.O9cdUL9IRHdMBXptUjt" & "3yKb6pWuUWqjzFzLcfBRf60k")
-
         Dim rpost As String = ""
 
         Try

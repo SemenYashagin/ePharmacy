@@ -1,21 +1,20 @@
 ﻿Imports Newtonsoft.Json
 
 Public Class Views
-    'Dim main As MainForm
-    Public Shared Function UpdateRecipestatus(main As MainForm) As String
+    Public Shared Function UpdateRecipestatus(main As MainForm, code As String) As String
         Dim result As String = ""
         Try
             Dim recipeStatus As Dictionary(Of String, String) = New Dictionary(Of String, String) From {
                 {"Выписан", "ISSUED"},
                 {"Испорчен", "SPOILED"},
-                {"Не обработан", "NOT_PROCESSED"},
                 {"Отпущен", "RELEASED"},
-                {"Отпущен частично", "RELEASED_PARTIALLY"},
-                {"Отсрочен", "DELAYED"},
-                {"Отложен", "RESERVED"},
-                {"Получен фармуправлением", "RECEIVED_BY_PHARMACY"},
-                {"Передан в РМИС", "SENT_TO_RMIS"}
-            }
+                {"Отпущен частично", "RELEASED_PARTIALLY"}
+                }
+            '{"Не обработан", "NOT_PROCESSED"},
+            '{"Отсрочен", "DELAYED"},
+            '{"Отложен", "RESERVED"}
+            '{"Получен фармуправлением", "RECEIVED_BY_PHARMACY"},
+            '{"Передан в РМИС", "SENT_TO_RMIS"}
 
             Dim stat = New Status
             Dim status = New NewStatus
@@ -24,9 +23,7 @@ Public Class Views
             status.status.type = recipeStatus.Item(main.cbRecipeStatus.Text)
 
             Dim newStatus As String = JsonConvert.SerializeObject(status)
-
-            Dim barcode As Prescription = JsonConvert.DeserializeObject(Of Prescription)(main.tbRecipeID.Text)
-            result = Request.UpdateRecipeByID("https://pharmacy.test.1er.app/api/v1/prescriptions", status, barcode.documentId)
+            result = Request.UpdateRecipeByID("https://pharmacy.test.1er.app/api/v1/prescriptions", status, code)
 
         Catch ex As KeyNotFoundException
             MessageBox.Show("Для изменения статуса рецепта сначала получите его")
@@ -73,6 +70,7 @@ Public Class Views
         If recipe.status.name = Nothing Then main.cbRecipeStatus.Text = "" Else main.cbRecipeStatus.Text = recipe.status.name
         If recipe.patient.sex = Nothing Then main.tbSex.Text = "" Else If recipe.patient.sex = 1 Then main.tbSex.Text = "муж" Else main.tbSex.Text = "жен"
         If recipe.status.name = Nothing Then main.tbCurrentStatus.Text = "" Else main.tbCurrentStatus.Text = recipe.status.name
+        If recipe._id = Nothing Then main.tbRecipeID.Text = "" Else main.tbRecipeID.Text = recipe._id
     End Sub
 
     ''' <summary>
