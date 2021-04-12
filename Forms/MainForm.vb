@@ -2,10 +2,9 @@
 Imports ePharmacy.Views
 
 Public Class MainForm
-
-
     Private patients As List(Of Tuple(Of String, String, eRecipe)) = New List(Of Tuple(Of String, String, eRecipe))
     Private postOrder As PostOrder
+    Property isDispose As Boolean
 
     Public Sub New(postOrder As PostOrder)
         InitializeComponent()
@@ -31,15 +30,22 @@ Public Class MainForm
             Dim data As DataTable = ToDataTable(recipe)
             GridControl1.DataSource = data
             GridView1.BestFitColumns(True) 'this shit for the best fitting of the widths of columns based on the context
+            postOrder.SelectedId = recipe._id
         Catch err As Newtonsoft.Json.JsonSerializationException
             MessageBox.Show("QR код считался неккоректно")
             Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
+            isDispose = True
+            Close()
         Catch ex As SystemException
             MessageBox.Show("Рецепт не найден ")
             Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
+            isDispose = True
+            Close()
         Catch er As JsonReaderException
             MessageBox.Show("QR код считался неккоректно")
             Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
+            isDispose = True
+            Close()
         End Try
     End Sub
 
@@ -47,7 +53,11 @@ Public Class MainForm
         Try
             Dim code As String = shortcode
             Dim str As String = Request.GetRecipebyId("https://pharmacy.test.1er.app/api/v1/prescriptions?code=" + code)
-
+            If (str = "[]") Then
+                MessageBox.Show("Вы ввели неверный код")
+                isDispose = True
+                Close()
+            End If
             Dim recipe As eRecipe() = JsonConvert.DeserializeObject(Of eRecipe())(str)
             If (recipe.Length = 1) Then
                 Views.EnterPatient(recipe(0), Me)
@@ -61,9 +71,13 @@ Public Class MainForm
         Catch ex As SystemException
             MessageBox.Show("Рецепт не найден ")
             Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
+            isDispose = True
+            Close()
         Catch er As JsonReaderException
             MessageBox.Show("Вы ввели неверный код")
             Views.ClearTextboxes(Me, Me) 'clear all textboxes and griddata
+            isDispose = True
+            Close()
         End Try
     End Sub
 

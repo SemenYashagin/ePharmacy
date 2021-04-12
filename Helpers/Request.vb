@@ -24,9 +24,9 @@ Public Class Request
 
                     Using reader As StreamReader = New StreamReader(stream)
                         rez_content = reader.ReadToEnd()
-                        If (rez_content = "[]") Then
-                            MessageBox.Show("Вы ввели неверный код")
-                        End If
+                        'If (rez_content = "[]") Then
+                        '    MessageBox.Show("Вы ввели неверный код")
+                        'End If
                     End Using
                 End Using
             End Using

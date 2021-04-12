@@ -22,23 +22,21 @@ Partial Class Orders
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Orders))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GridControl2 = New DevExpress.XtraGrid.GridControl()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.clmMNN = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.clmName = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
-        Me.clmForma = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.clmDosage = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.clmPackageContent = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.clmTotalamount = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemRichTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit()
+        Me.clmPackageContent = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.clmDosage = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.clmForma = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemRichTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -57,7 +55,6 @@ Partial Class Orders
         Me.GridControl2.Location = New System.Drawing.Point(6, 21)
         Me.GridControl2.MainView = Me.GridView2
         Me.GridControl2.Name = "GridControl2"
-        Me.GridControl2.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemRichTextEdit1, Me.RepositoryItemMemoEdit1})
         Me.GridControl2.Size = New System.Drawing.Size(512, 168)
         Me.GridControl2.TabIndex = 34
         Me.GridControl2.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView2})
@@ -89,7 +86,8 @@ Partial Class Orders
         'clmName
         '
         Me.clmName.Caption = "Торговое наименование"
-        Me.clmName.ColumnEdit = Me.RepositoryItemMemoEdit1
+        RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
+        Me.clmName.ColumnEdit = RepositoryItemMemoEdit1
         Me.clmName.FieldName = "clmName"
         Me.clmName.Name = "clmName"
         Me.clmName.OptionsColumn.AllowMove = False
@@ -100,21 +98,27 @@ Partial Class Orders
         Me.clmName.VisibleIndex = 1
         Me.clmName.Width = 132
         '
-        'RepositoryItemMemoEdit1
+        'clmTotalamount
         '
-        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
+        Me.clmTotalamount.Caption = "Кол-во товара (упаковок)"
+        Me.clmTotalamount.FieldName = "clmTotalamount"
+        Me.clmTotalamount.Name = "clmTotalamount"
+        Me.clmTotalamount.OptionsColumn.AllowMove = False
+        Me.clmTotalamount.OptionsColumn.AllowSize = False
+        Me.clmTotalamount.OptionsFilter.AllowFilter = False
+        Me.clmTotalamount.Visible = True
+        Me.clmTotalamount.VisibleIndex = 5
+        Me.clmTotalamount.Width = 291
         '
-        'clmForma
+        'clmPackageContent
         '
-        Me.clmForma.Caption = "Форма выпуска"
-        Me.clmForma.FieldName = "clmForma"
-        Me.clmForma.Name = "clmForma"
-        Me.clmForma.OptionsColumn.AllowMove = False
-        Me.clmForma.OptionsColumn.AllowSize = False
-        Me.clmForma.OptionsFilter.AllowFilter = False
-        Me.clmForma.Visible = True
-        Me.clmForma.VisibleIndex = 2
-        Me.clmForma.Width = 88
+        Me.clmPackageContent.Caption = "В одной упаковке"
+        Me.clmPackageContent.FieldName = "clmPackageContent"
+        Me.clmPackageContent.Name = "clmPackageContent"
+        Me.clmPackageContent.OptionsColumn.AllowMove = False
+        Me.clmPackageContent.OptionsColumn.AllowSize = False
+        Me.clmPackageContent.Visible = True
+        Me.clmPackageContent.VisibleIndex = 4
         '
         'clmDosage
         '
@@ -123,35 +127,18 @@ Partial Class Orders
         Me.clmDosage.Name = "clmDosage"
         Me.clmDosage.OptionsColumn.AllowMove = False
         Me.clmDosage.OptionsColumn.AllowSize = False
-        Me.clmDosage.OptionsFilter.AllowFilter = False
         Me.clmDosage.Visible = True
         Me.clmDosage.VisibleIndex = 3
-        Me.clmDosage.Width = 65
         '
-        'clmPackageContent
+        'clmForma
         '
-        Me.clmPackageContent.Caption = "В одной упаковке"
-        Me.clmPackageContent.FieldName = "clmPackageContent"
-        Me.clmPackageContent.Name = "clmPackageContent"
-        Me.clmPackageContent.Visible = True
-        Me.clmPackageContent.VisibleIndex = 5
-        '
-        'clmTotalamount
-        '
-        Me.clmTotalamount.Caption = "Кол-во единиц"
-        Me.clmTotalamount.FieldName = "clmTotalamount"
-        Me.clmTotalamount.Name = "clmTotalamount"
-        Me.clmTotalamount.OptionsColumn.AllowMove = False
-        Me.clmTotalamount.OptionsColumn.AllowSize = False
-        Me.clmTotalamount.OptionsFilter.AllowFilter = False
-        Me.clmTotalamount.Visible = True
-        Me.clmTotalamount.VisibleIndex = 4
-        Me.clmTotalamount.Width = 291
-        '
-        'RepositoryItemRichTextEdit1
-        '
-        Me.RepositoryItemRichTextEdit1.Name = "RepositoryItemRichTextEdit1"
-        Me.RepositoryItemRichTextEdit1.ShowCaretInReadOnly = False
+        Me.clmForma.Caption = "Форма выпуска"
+        Me.clmForma.FieldName = "clmForma"
+        Me.clmForma.Name = "clmForma"
+        Me.clmForma.OptionsColumn.AllowMove = False
+        Me.clmForma.OptionsColumn.AllowSize = False
+        Me.clmForma.Visible = True
+        Me.clmForma.VisibleIndex = 2
         '
         'Orders
         '
@@ -167,8 +154,7 @@ Partial Class Orders
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.GridControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemRichTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -178,10 +164,8 @@ Partial Class Orders
     Private WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents clmMNN As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents clmName As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents clmTotalamount As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents clmForma As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents clmDosage As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents clmTotalamount As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents RepositoryItemRichTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit
     Friend WithEvents clmPackageContent As DevExpress.XtraGrid.Columns.GridColumn
 End Class

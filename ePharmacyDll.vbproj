@@ -90,6 +90,7 @@
     <Compile Include="Entities\NewStatus.vb" />
     <Compile Include="Entities\PharmacyOrder.vb" />
     <Compile Include="Entities\Prescription.vb" />
+    <Compile Include="Entities\ResponseData.vb" />
     <Compile Include="Forms\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>

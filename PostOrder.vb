@@ -10,13 +10,19 @@ Public Class PostOrder
         Dim main As New MainForm(Me)
         main.Activate()
         main.NewClass(shortcode, qrcode)
-        main.Show()
+        If (Not main.IsDisposed) Then
+            main.Show()
+        Else
+            main.Dispose()
+        End If
     End Sub
 
-    Public Function PostRequest(ByVal Order As PharmacyOrder) As String
+    Public Function PostRequest(ByVal Order As PharmacyOrder) As ResponseData
         Const _Tls12 As SslProtocols = DirectCast(&HC00, SslProtocols)
         Const Tls12 As SecurityProtocolType = DirectCast(_Tls12, SecurityProtocolType)
         ServicePointManager.SecurityProtocol = Tls12
+
+        Dim response As New ResponseData
 
         Dim bmyrequest As Byte() = Nothing
         Dim rez_content As String = ""
@@ -36,11 +42,12 @@ Public Class PostOrder
             str.Close()
             Dim resp As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
             Dim StrRdr As StreamReader = New StreamReader(resp.GetResponseStream(), Encoding.UTF8)
-            rez_content = StrRdr.ReadToEnd()
+            response.Data = StrRdr.ReadToEnd()
+            response.IsSuccess = True
         Catch e As Exception
-            rez_content = "ERROR-ex" & e.Message
+            response.IsSuccess = False
+            response.ErrorMessage = e.Message
         End Try
-
-        Return rez_content
+        Return response
     End Function
 End Class
